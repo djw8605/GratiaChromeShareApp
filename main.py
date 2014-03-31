@@ -22,7 +22,7 @@ def hello():
     return 'Hello World!'
 
 
-@app.route('/api/profile', methods = ['PUT'])
+@app.route('/api/profile', methods = ['POST'])
 def putProfile():
     """
     Save the profile.
