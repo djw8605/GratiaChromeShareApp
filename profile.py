@@ -10,7 +10,7 @@ class Profile(ndb.Model):
     description = ndb.StringProperty()
     create_date = ndb.DateTimeProperty(auto_now_add=True)
     last_access = ndb.DateTimeProperty()
-    profile_json = ndb.StringProperty()
+    profile_json = ndb.TextProperty()
     
     def to_dict(self):
         return {
