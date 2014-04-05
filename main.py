@@ -2,9 +2,11 @@
 
 # Import the Flask Framework
 from flask import Flask
-from flask import request, abort, jsonify
+from flask import request, abort, jsonify, url_for
+from flask import Response
 
 from profile import validate_profile, save_profile, get_profile
+from embed import create_embed
 
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
@@ -35,7 +37,7 @@ def putProfile():
         
     if validate_profile(request.json):
         id = save_profile(request.json)
-        return_dict = { "id": id, "url": "%s/%s" % (request.url, id) }
+        return_dict = { "id": id, "url":  url_for('getProfile', profileId=id, _external=True), "embed": "<script src='%s'></script>" % url_for('embedProfile', profileId=id, _external=True) }
         return jsonify( return_dict )
     else:
         abort(500)
@@ -53,6 +55,19 @@ def getProfile(profileId):
         return jsonify( test_profile )
     else:
         return jsonify( get_profile(profileId) )
+    
+
+
+@app.route('/embed/profile/<profileId>.js', methods = ['GET'])
+def embedProfile(profileId):
+    """
+    Embed the profile.
+    
+    Returns javascript file that does a document.write to insert the graphs.
+    """
+    profile = get_profile(profileId)
+    if profile:
+        return Response(create_embed(profile), mimetype='application/javascript')
     
 
 
