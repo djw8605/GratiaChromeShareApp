@@ -18,7 +18,7 @@ def create_html(imageURL, name, description):
     <div class="osg-usage-graphs-image">%(imageTag)s</div>
     <div class="osg-usage-graphs-content">
     <div class="osg-usage-graphs-title">
-    %(name)s
+    <h2>%(name)s</h2>
     </div>
     <p>%(description)s</p>
     </div>
