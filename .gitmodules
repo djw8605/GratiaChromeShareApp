@@ -1,0 +1,4 @@
+[submodule "OSG-Usage-Chrome-App"]
+	path = OSG-Usage-Chrome-App
+	url = https://github.com/djw8605/OSG-Usage-Chrome-App.git
+	branch = make-webpage
